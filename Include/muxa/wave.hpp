@@ -1,4 +1,5 @@
 #pragma once
+#include "muxa/constants.hpp"
 #include "muxa/types.hpp"
 #include <vector>
 namespace muxa {
@@ -10,6 +11,7 @@ private:
   std::vector<double> samplesM;
 
 public:
-  Wave(double duration, i64 channels = 2, i64 frameRate = 48'000);
+  explicit Wave(double duration, i64 channels = kChannels,
+                i64 frameRate = kFrameRate);
 };
 } // namespace muxa

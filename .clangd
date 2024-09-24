@@ -1,0 +1,47 @@
+{
+    "Index": {
+        "Background": "Build"
+    },
+    "Completion": {
+        "AllScopes": true
+    },
+    "InlayHints": {
+        "BlockEnd": "Yes",
+        "Designators": "Yes",
+        "Enabled": "Yes",
+        "ParameterNames": "Yes",
+        "DeducedTypes": "Yes",
+        "TypeNameLimit": 0
+    },
+    "Hover": {
+        "ShowAKA": "Yes"
+    },
+    "Diagnostics": {
+        "UnusedIncludes": "Strict",
+        "MissingIncludes": "Strict",
+        "ClangTidy": {
+            "Add": [
+                "boost-*",
+                "bugprone-*",
+                "cert-*",
+                "clang-analyzer-*",
+                "concurrency-*",
+                "cppcoreguidelines-*",
+                "google-*",
+                "hicpp-*",
+                "llvm-*",
+                "misc-*",
+                "modernize-*",
+                "performance-*",
+                "portability-*",
+                "readability-*"
+            ],
+            "Remove": [
+                "bugprone-narrowing-conversions",
+                "bugprone-easily-swappable-parameters",
+                "cppcoreguidelines-narrowing-conversions"
+            ],
+            "FastCheckFilter": "Strict"
+        }
+    }
+}

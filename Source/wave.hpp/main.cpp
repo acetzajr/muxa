@@ -1,4 +1,5 @@
 #include "muxa/frameRate.hpp"
+#include "muxa/types.hpp"
 #include "muxa/wave.hpp"
 namespace muxa {
 Wave::Wave(double durationP, i64 channelsP, i64 frameRateP)

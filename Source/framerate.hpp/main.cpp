@@ -1,7 +1,10 @@
 #include "muxa/frameRate.hpp"
+#include "muxa/types.hpp"
 namespace muxa {
-i64 timeToFrame(double timeP, i64 frameRateP) { return timeP * frameRateP; }
-double frameToTime(i64 frameP, i64 frameRateP) {
-  return (double)frameP / frameRateP;
+auto timeToFrame(double timeP, i64 frameRateP) -> i64 {
+  return timeP * frameRateP;
+}
+auto frameToTime(i64 frameP, i64 frameRateP) -> double {
+  return static_cast<double>(frameP) / frameRateP;
 }
 } // namespace muxa
