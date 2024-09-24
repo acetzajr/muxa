@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# acetzajr
+.cache/
+build/
+Docs/
+out/
