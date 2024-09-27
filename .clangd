@@ -41,6 +41,8 @@
                 "bugprone-easily-swappable-parameters",
                 "cppcoreguidelines-avoid-magic-numbers",
                 "cppcoreguidelines-narrowing-conversions",
+                "misc-non-private-member-variables-in-classes",
+                "readability-identifier-length",
                 "readability-magic-numbers"
             ],
             "FastCheckFilter": "Strict"

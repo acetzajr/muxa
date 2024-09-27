@@ -2,6 +2,7 @@
 #include "muxa/constants.hpp"
 #include "muxa/frame.hpp"
 #include "muxa/types.hpp"
+#include <string>
 #include <vector>
 namespace muxa {
 class Wave {
@@ -18,5 +19,7 @@ public:
   auto operator[](i64 frame) -> Frame &;
   [[nodiscard]] auto frames() const -> i64;
   [[nodiscard]] auto channels() const -> i64;
+  auto save(const std::string &path = "out/wave.wav") -> Wave;
+  auto normalize() -> Wave;
 };
 } // namespace muxa
