@@ -41,6 +41,7 @@
                 "bugprone-easily-swappable-parameters",
                 "cppcoreguidelines-avoid-magic-numbers",
                 "cppcoreguidelines-narrowing-conversions",
+                "google-build-using-namespace",
                 "misc-non-private-member-variables-in-classes",
                 "readability-identifier-length",
                 "readability-magic-numbers"
