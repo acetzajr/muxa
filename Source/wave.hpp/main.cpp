@@ -29,7 +29,7 @@ auto Wave::save(const std::string &pathP) -> Wave {
     throw std::runtime_error(sf_strerror(file));
   }
   auto written = sf_writef_double(file, samplesM.data(), framesCountM);
-  if (written != framesCountM) {
+  if (static_cast<u64>(written) != framesCountM) {
     std::cerr << "writtten: " << written << ", frames: " << framesCountM
               << "\n";
     throw std::runtime_error(sf_strerror(file));
