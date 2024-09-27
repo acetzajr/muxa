@@ -1,4 +1,4 @@
 #pragma once
 namespace muxa {
-auto sin(double part) -> double;
+auto sin(real part) -> real;
 } // namespace muxa

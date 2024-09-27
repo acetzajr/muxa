@@ -7,19 +7,19 @@
 namespace muxa {
 class Wave {
 private:
-  i64 framesCountM;
-  i64 channelsM;
-  i64 frameRateM;
-  std::vector<double> samplesM;
+  u64 framesCountM;
+  u64 channelsM;
+  u64 frameRateM;
+  std::vector<real> samplesM;
   std::vector<Frame> framesM;
 
 public:
-  explicit Wave(double duration, i64 channels = kChannels,
-                i64 frameRate = kFrameRate);
-  auto operator[](i64 frame) -> Frame &;
-  [[nodiscard]] auto frames() const -> i64;
-  [[nodiscard]] auto channels() const -> i64;
+  explicit Wave(real duration, u64 channels = kChannels,
+                u64 frameRate = kFrameRate);
+  auto operator[](u64 frame) -> Frame &;
+  [[nodiscard]] auto frames() const -> u64;
+  [[nodiscard]] auto channels() const -> u64;
   auto save(const std::string &path = "out/wave.wav") -> Wave;
-  auto normalize() -> Wave;
+  auto normalize(real amplitude = kAmpliude) -> Wave;
 };
 } // namespace muxa

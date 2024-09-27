@@ -5,11 +5,12 @@
 namespace muxa {
 class Sya {
 public:
-  double timeM = kTime;
-  double frequencyM = kFrequency;
-  double durationM = kDuration;
-  double amplitudeM = kAmpliude;
-  double releaseM = kRelease;
+  real timeM = kTime;
+  real frequencyM = kFrequency;
+  real durationM = kDuration;
+  real amplitudeM = kAmpliude;
+  real attackM = kAttack;
+  real releaseM = kRelease;
   i64 channelsM = kChannels;
   i64 frameRateM = kFrameRate;
   auto wave(Wave &wave) const -> Wave;

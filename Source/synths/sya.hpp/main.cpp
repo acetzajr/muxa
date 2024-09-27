@@ -7,26 +7,36 @@
 #include <cmath>
 namespace muxa {
 auto Sya::wave(Wave &waveP) const -> Wave {
-  i64 startFrame = timeToFrame(timeM, frameRateM);
-  i64 endFrame = startFrame;
+  u64 startFrame = timeToFrame(timeM, frameRateM);
+  u64 attackFrame = startFrame;
+  u64 endFrame = startFrame;
   endFrame += timeToFrame(durationM, frameRateM);
-  i64 releaseFrame = endFrame;
+  u64 releaseFrame = endFrame;
   endFrame += timeToFrame(releaseM, frameRateM);
-  for (i64 frame = startFrame; frame < endFrame && frame < waveP.frames();
+  for (u64 frame = startFrame; frame < endFrame && frame < waveP.frames();
        frame++) {
-    double time = frameToTime(frame, frameRateM);
-    double part = std::fmod(time * frequencyM, 1);
-    double sample = muxa::sin(part) * amplitudeM;
-    for (i64 channel = 0; channel < waveP.channels(); channel++) {
+    real time = frameToTime(frame, frameRateM);
+    real part = std::fmod(time * frequencyM, 1);
+    real sample = muxa::sin(part) * amplitudeM;
+    for (u64 channel = 0; channel < waveP.channels(); channel++) {
       waveP[frame][channel] += sample;
     }
   }
-  i64 releaseFrames = endFrame - releaseFrame;
-  for (i64 frame = releaseFrame; frame < endFrame && frame < waveP.frames();
+  u64 attackFrames = timeToFrame(attackM, frameRateM);
+  for (u64 frame = attackFrame;
+       frame < attackFrame + attackFrames && frame < waveP.frames(); frame++) {
+    real part = static_cast<real>(frame) / attackFrames;
+    real multiplier = std::sin(kHalfPi * part);
+    for (u64 channel = 0; channel < waveP.channels(); channel++) {
+      waveP[frame][channel] *= multiplier;
+    }
+  }
+  u64 releaseFrames = endFrame - releaseFrame;
+  for (u64 frame = releaseFrame; frame < endFrame && frame < waveP.frames();
        frame++) {
-    double part = static_cast<double>(frame - releaseFrame) / releaseFrames;
-    double multiplier = std::sin(kHalfPi * part + kHalfPi);
-    for (i64 channel = 0; channel < waveP.channels(); channel++) {
+    real part = static_cast<real>(frame - releaseFrame) / releaseFrames;
+    real multiplier = std::sin(kHalfPi * part + kHalfPi);
+    for (u64 channel = 0; channel < waveP.channels(); channel++) {
       waveP[frame][channel] *= multiplier;
     }
   }

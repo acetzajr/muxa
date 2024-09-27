@@ -2,24 +2,23 @@
 #include "muxa/frameRate.hpp"
 #include "muxa/types.hpp"
 #include "muxa/wave.hpp"
-#include <cstddef>
 #include <cstdio>
 #include <iostream>
 #include <sndfile.h>
 #include <stdexcept>
 #include <string>
 namespace muxa {
-Wave::Wave(double durationP, i64 channelsP, i64 frameRateP)
+Wave::Wave(real durationP, u64 channelsP, u64 frameRateP)
     : framesCountM(timeToFrame(durationP, frameRateP)), channelsM(channelsP),
       frameRateM(frameRateP), samplesM(framesCountM * channelsM),
       framesM(framesCountM, Frame(samplesM.data(), channelsP)) {
-  for (i64 i = 0; i < framesCountM; i++) {
+  for (u64 i = 0; i < framesCountM; i++) {
     framesM[i].setPointer(&samplesM[i * channelsM]);
   }
 }
-auto Wave::operator[](i64 frameP) -> Frame & { return framesM[frameP]; }
-auto Wave::frames() const -> i64 { return framesCountM; };
-auto Wave::channels() const -> i64 { return channelsM; };
+auto Wave::operator[](u64 frameP) -> Frame & { return framesM[frameP]; }
+auto Wave::frames() const -> u64 { return framesCountM; };
+auto Wave::channels() const -> u64 { return channelsM; };
 auto Wave::save(const std::string &pathP) -> Wave {
   SF_INFO sfinfo;
   sfinfo.samplerate = frameRateM;
@@ -38,8 +37,8 @@ auto Wave::save(const std::string &pathP) -> Wave {
   sf_close(file);
   return *this;
 }
-auto Wave::normalize() -> Wave {
-  double max = 0;
+auto Wave::normalize(real amplitudeP) -> Wave {
+  real max = 0;
   for (auto &sample : samplesM) {
     if (sample > max) {
       max = sample;
@@ -47,6 +46,7 @@ auto Wave::normalize() -> Wave {
   }
   for (auto &sample : samplesM) {
     sample /= max;
+    sample *= amplitudeP;
   }
   return *this;
 }

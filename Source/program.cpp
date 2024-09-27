@@ -1,12 +1,17 @@
 #include "muxa/scales.hpp"
 #include "muxa/synths/sya.hpp"
-#include "muxa/types.hpp"
 #include "muxa/wave.hpp"
-#include <iostream>
 auto main() -> int {
-  std::cout << "Muxa\n";
-  muxa::Wave wave(4);
+  muxa::Scale scale;
+  muxa::Wave wave(6);
   muxa::Sya synth;
+  synth.frequencyM = scale.frequencyOf(0);
   synth.wave(wave);
-  muxa::Scale::test();
+  synth.timeM += 2;
+  synth.frequencyM = scale.frequencyOf(0 + 1);
+  synth.wave(wave);
+  synth.timeM += 2;
+  synth.frequencyM = scale.frequencyOf(0 + 1 + 1);
+  synth.wave(wave);
+  wave.normalize(0.75).save();
 }

@@ -5,13 +5,13 @@
 namespace muxa {
 class Frame {
 private:
-  double *samplesM;
+  real *samplesM;
   i64 channelsM;
-  std::span<double> spanM;
+  std::span<real> spanM;
 
 public:
-  explicit Frame(double *samples, i64 channels = kChannels);
-  void setPointer(double *samples);
-  auto operator[](i64 channel) -> double &;
+  explicit Frame(real *samples, i64 channels = kChannels);
+  void setPointer(real *samples);
+  auto operator[](i64 channel) -> real &;
 };
 } // namespace muxa
