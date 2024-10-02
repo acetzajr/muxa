@@ -19,10 +19,6 @@ private:
   std::vector<fftw_plan> fftBackwardPlansM;
 
 public:
-  Wave(const Wave &) = default;
-  Wave(Wave &&) = delete;
-  auto operator=(const Wave &) -> Wave & = default;
-  auto operator=(Wave &&) -> Wave & = delete;
   explicit Wave(real duration, u64 channels = kChannels,
                 u64 frameRate = kFrameRate);
   ~Wave();

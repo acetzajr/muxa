@@ -3,7 +3,6 @@
 #include "muxa/synths/sya.hpp"
 #include "muxa/types.hpp"
 #include "muxa/wave.hpp"
-#include "muxa/waveForms.hpp"
 #include <cmath>
 namespace muxa {
 auto Sya::wave(Wave &waveP) const -> Wave {
@@ -17,7 +16,7 @@ auto Sya::wave(Wave &waveP) const -> Wave {
        frame++) {
     real time = frameToTime(frame, frameRateM);
     real part = std::fmod(time * frequencyM, 1);
-    real sample = muxa::saw(part) * amplitudeM;
+    real sample = waveFormM(part) * amplitudeM;
     for (u64 channel = 0; channel < waveP.channels(); channel++) {
       waveP[frame][channel] += sample;
     }

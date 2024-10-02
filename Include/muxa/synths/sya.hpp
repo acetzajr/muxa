@@ -2,9 +2,11 @@
 #include "muxa/constants.hpp"
 #include "muxa/types.hpp"
 #include "muxa/wave.hpp"
+#include "muxa/waveForms.hpp"
 namespace muxa {
 class Sya {
 public:
+  WaveForm waveFormM = kWaveForm;
   real timeM = kTime;
   real frequencyM = kFrequency;
   real durationM = kDuration;
