@@ -28,6 +28,12 @@ Wave::~Wave() {
     if (fftOutM[channel] != nullptr) {
       fftw_free(fftOutM[channel]);
     }
+    if (fftForwardPlansM[channel] != nullptr) {
+      fftw_destroy_plan(fftForwardPlansM[channel]);
+    }
+    if (fftBackwardPlansM[channel] != nullptr) {
+      fftw_destroy_plan(fftBackwardPlansM[channel]);
+    }
   }
 }
 auto Wave::operator[](u64 frameP) -> Frame & { return framesM[frameP]; }
@@ -64,7 +70,7 @@ auto Wave::normalize(real amplitudeP) -> Wave & {
   }
   return *this;
 }
-auto Wave::reafirm(real power) -> Wave & {
+auto Wave::reafirm() -> Wave & {
   for (u64 channel = 0; channel < channelsM; channel++) {
     if (fftInM[channel] == nullptr) {
       fftInM[channel] =
@@ -90,15 +96,15 @@ auto Wave::reafirm(real power) -> Wave & {
     fftw_execute(fftForwardPlansM[channel]);
   }
   for (u64 channel = 0; channel < channelsM; channel++) {
-    // Apply the low-pass filter
-    real cutoff_freq = 440; // Adjust the cutoff frequency as needed
     for (u64 i = 0; i < framesCountM; i++) {
-      double frequency = i * frameRateM / static_cast<real>(framesCountM);
-      std::cout << frequency << "\n";
-      if (frequency > cutoff_freq) {
+      double frequency = 1.0 * i * frameRateM / framesCountM;
+      if (frequency >= frameRateM / 2.0) {
         fftOutM[channel][i][0] = 0;
         fftOutM[channel][i][1] = 0;
+        continue;
       }
+      fftOutM[channel][i][0] /= frequency + 12.0;
+      fftOutM[channel][i][1] /= frequency + 12.0;
     }
     fftw_execute(fftBackwardPlansM[channel]);
   }

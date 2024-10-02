@@ -31,6 +31,6 @@ public:
   [[nodiscard]] auto channels() const -> u64;
   auto save(const std::string &path = "out/wave.wav") -> Wave &;
   auto normalize(real amplitude = kAmpliude) -> Wave &;
-  auto reafirm(real power = 2) -> Wave &;
+  auto reafirm() -> Wave &;
 };
 } // namespace muxa
