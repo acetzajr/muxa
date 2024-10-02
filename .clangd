@@ -41,7 +41,9 @@
                 "bugprone-easily-swappable-parameters",
                 "cppcoreguidelines-avoid-magic-numbers",
                 "cppcoreguidelines-narrowing-conversions",
+                "cppcoreguidelines-pro-bounds-array-to-pointer-decay",
                 "google-build-using-namespace",
+                "hicpp-no-array-decay",
                 "misc-non-private-member-variables-in-classes",
                 "readability-identifier-length",
                 "readability-magic-numbers"

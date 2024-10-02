@@ -19,4 +19,5 @@ constexpr real kHalfPi = std::numbers::pi / 2;
 constexpr real kScaleBase = 360;
 constexpr u64 kScaleSize = 5;
 constexpr u64 kScaleFundamental = 0;
+constexpr u64 kColorMax = 65535;
 } // namespace muxa

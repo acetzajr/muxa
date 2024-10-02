@@ -17,14 +17,15 @@ auto Sya::wave(Wave &waveP) const -> Wave {
        frame++) {
     real time = frameToTime(frame, frameRateM);
     real part = std::fmod(time * frequencyM, 1);
-    real sample = muxa::sin(part) * amplitudeM;
+    real sample = muxa::saw(part) * amplitudeM;
     for (u64 channel = 0; channel < waveP.channels(); channel++) {
       waveP[frame][channel] += sample;
     }
   }
   u64 attackFrames = timeToFrame(attackM, frameRateM);
-  for (u64 frame = attackFrame;
-       frame < attackFrame + attackFrames && frame < waveP.frames(); frame++) {
+  u64 attackEnd = attackFrame + attackFrames;
+  for (u64 frame = attackFrame; frame < attackEnd && frame < waveP.frames();
+       frame++) {
     real part = static_cast<real>(frame) / attackFrames;
     real multiplier = std::sin(kHalfPi * part);
     for (u64 channel = 0; channel < waveP.channels(); channel++) {
